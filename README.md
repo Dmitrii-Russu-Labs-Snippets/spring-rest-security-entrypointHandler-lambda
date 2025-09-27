@@ -5,6 +5,19 @@ Returns custom JSON for `401 Unauthorized` and `ProblemDetail` (RFC7807) for `40
 
 ---
 
+## Overview
+
+This repository demonstrates a minimal and compact way to customize Spring Security error handling using **lambdas directly in `SecurityConfig`**.  
+Instead of creating separate component classes or beans, both `AuthenticationEntryPoint` and `AccessDeniedHandler` are implemented inline as lambda expressions.  
+
+This keeps the setup very concise — ideal for demos, prototypes, or smaller projects — while still returning consistent JSON error responses:  
+- **401 Unauthorized** → custom JSON body  
+- **403 Forbidden** → `ProblemDetail` (RFC 7807) format  
+
+Implementation difference vs other repos: handlers are defined **inline as lambdas** in the `SecurityFilterChain`, not as `@Component` classes or `@Bean` methods.
+
+---
+
 ## Features
 - 401 Unauthorized → simple custom JSON (`status`, `error`, `message`, `timestamp`, `path`)
 - 403 Forbidden → RFC7807 `ProblemDetail` (`type`, `title`, `status`, `detail`, `instance`, `timestamp`)
