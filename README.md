@@ -44,13 +44,17 @@ Spring Security 6+
 ./mvnw spring-boot:run
 ```
 
-##Call protected endpoints to see JSON and ProblemDetail responses for 401/403:
+Call protected endpoints to see JSON and ProblemDetail responses for 401/403:
 
-```curl -u anny@gmail.com:1234 http://localhost:8080/auth/user```
+```
+curl -u anny@gmail.com:1234 http://localhost:8080/auth/user
+```
 
-```curl -u ann@gmail.com:1234 http://localhost:8080/auth/admin```
+```
+curl -u ann@gmail.com:1234 http://localhost:8080/auth/admin
+```
 
-##Related Repositories:
+Related Repositories:
 
 - spring-rest-security-entrypointHandler-component – AuthenticationEntryPoint & AccessDeniedHandler as separate components
 
