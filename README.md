@@ -17,8 +17,7 @@ Content-Type: `application/json`
   "error": "Unauthorized",
   "message": "Authentication failed",
   "timestamp": "2025-09-27T10:00:00Z",
-  "path": "/auth/user",
-  "traceId": "..."
+  "path": "/auth/user"
 }
 ```
 
@@ -31,8 +30,7 @@ Content-Type: `application/json`
   "status": 403,
   "detail": "Access Denied",
   "instance": "/auth/admin",
-  "timestamp": "2025-09-27T10:01:00Z",
-  "traceId": "..."
+  "timestamp": "2025-09-27T10:01:00Z"
 }
 ```
 
