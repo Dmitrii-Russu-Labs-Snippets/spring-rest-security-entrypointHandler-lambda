@@ -41,17 +41,20 @@ Content-Type: `application/json`
 ./mvnw spring-boot:run
 ```
 ## Example curl
+401 (no credentials)
 ```
-# 401 (no credentials)
 curl -i http://localhost:8080/auth/user
 ```
-```# 401 (wrong credentials)
+401 (wrong credentials)
+```
 curl -i -u wrong:wrong http://localhost:8080/auth/user
 ```
-```# 403 (authenticated but not authorized)
+403 (authenticated but not authorized)
+```
 curl -i -u ann:1234 http://localhost:8080/auth/admin
 ```
-```# 200 (authorized)
+200 (authorized)
+```
 curl -i -u jack:123 http://localhost:8080/auth/admin
 ```
 
