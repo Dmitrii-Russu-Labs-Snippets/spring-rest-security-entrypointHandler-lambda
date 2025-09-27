@@ -4,10 +4,10 @@ Custom `AuthenticationEntryPoint` and `AccessDeniedHandler` implemented as **lam
 Returns custom JSON for `401 Unauthorized` and `ProblemDetail` (RFC7807) for `403 Forbidden`.
 
 ## Features
-- 401 Unauthorized → simple custom JSON (`status`, `error`, `message`, `timestamp`, `path`, `traceId`)
-- 403 Forbidden → RFC7807 `ProblemDetail` (`type`, `title`, `status`, `detail`, `instance`, `timestamp`, `traceId`)
+- 401 Unauthorized → simple custom JSON (`status`, `error`, `message`, `timestamp`, `path`)
+- 403 Forbidden → RFC7807 `ProblemDetail` (`type`, `title`, `status`, `detail`, `instance`, `timestamp`)
 - Compact implementation using lambdas in `SecurityFilterChain` (no separate components)
-- Easy to adapt to production (inject ObjectMapper, MDC/traceId integration)
+- Easy to adapt to production (inject `ObjectMapper`, integrate MDC/tracing for `traceId`)
 
 ## Example 401 response
 Content-Type: `application/json`
@@ -22,7 +22,7 @@ Content-Type: `application/json`
 ```
 
 ## Example 403 response
-Content-Type: `application/json`
+Content-Type: `application/problem+json`
 ```json
 {
   "type": "about:blank",
