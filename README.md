@@ -16,6 +16,10 @@ This keeps the setup very concise — ideal for demos, prototypes, or smaller pr
 
 Implementation difference vs other repos: handlers are defined **inline as lambdas** in the `SecurityFilterChain`, not as `@Component` classes or `@Bean` methods.
 
+Implementation difference vs other repos: handlers are defined inline as lambdas in the `SecurityFilterChain`,  
+not as [@Component classes](https://github.com/Dmitrii-Russu-Labs-Snippets/spring-rest-security-entrypointHandler-component)  
+or [@Bean methods](https://github.com/Dmitrii-Russu-Labs-Snippets/spring-rest-security-entrypointHandler-bean).
+
 ---
 
 ## Features
