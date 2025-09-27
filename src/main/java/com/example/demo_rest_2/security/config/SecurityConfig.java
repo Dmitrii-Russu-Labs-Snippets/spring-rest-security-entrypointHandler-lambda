@@ -1,9 +1,11 @@
 package com.example.demo_rest_2.security.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ProblemDetail;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -14,6 +16,8 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import java.net.URI;
 import java.time.Instant;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -45,35 +49,6 @@ public class SecurityConfig {
                 .exceptionHandling(ex -> ex
                         // 401 Unauthorized
                         .authenticationEntryPoint((request, response, authException) -> {
-                            ProblemDetail pd = ProblemDetail.forStatusAndDetail(
-                                    HttpStatus.UNAUTHORIZED, "Authentication required"
-                            );
-                            // Добавляем дополнительные поля
-                            pd.setInstance(URI.create(request.getRequestURI()));
-                            pd.setProperty("timestamp", Instant.now().toString());
-                            pd.setProperty("path", request.getRequestURI());
-
-                            response.setStatus(HttpStatus.UNAUTHORIZED.value());
-                            response.setContentType("application/problem+json");
-                            mapper.writeValue(response.getWriter(), pd);
-                        })
-                        // 403 Forbidden
-                        .accessDeniedHandler((request, response, accessDeniedException) -> {
-                            ProblemDetail pd = ProblemDetail.forStatusAndDetail(
-                                    HttpStatus.FORBIDDEN, "Access denied"
-                            );
-                            // Добавляем дополнительные поля
-                            pd.setInstance(URI.create(request.getRequestURI()));
-                            pd.setProperty("timestamp", Instant.now().toString());
-                            pd.setProperty("path", request.getRequestURI());
-
-                            response.setStatus(HttpStatus.FORBIDDEN.value());
-                            response.setContentType("application/problem+json");
-                            mapper.writeValue(response.getWriter(), pd);
-                        })
-                );
-                /*.exceptionHandling(ex -> ex
-                        .authenticationEntryPoint((request, response, authException) -> {
 
                             Map<String,Object> body = new LinkedHashMap<>();
                             body.put("timestamp", Instant.now().toString());
@@ -87,20 +62,23 @@ public class SecurityConfig {
 
                             mapper.writeValue(response.getOutputStream(), body);
                         })
+                        // 403 Forbidden
                         .accessDeniedHandler((request, response, accessDeniedException) -> {
+                            ProblemDetail pd = ProblemDetail.forStatusAndDetail(
+                                    HttpStatus.FORBIDDEN, "Access denied"
+                            );
+                            // Добавляем дополнительные поля
+                            pd.setInstance(URI.create(request.getRequestURI()));
+                            pd.setProperty("timestamp", Instant.now().toString());
+                            pd.setProperty("path", request.getRequestURI());
 
-                            Map<String,Object> body = new LinkedHashMap<>();
-                            body.put("timestamp", Instant.now().toString());
-                            body.put("status", HttpStatus.FORBIDDEN.value());
-                            body.put("error", HttpStatus.FORBIDDEN.getReasonPhrase()); // "Forbidden"
-                            body.put("message", "Access Denied");
-                            body.put("path", request.getRequestURI());
+                            response.setStatus(HttpStatus.FORBIDDEN.value());
+                            response.setContentType("application/problem+json");
 
-                            response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-                            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                            mapper.writeValue(response.getWriter(), pd);
+                        })
+                );
 
-                            mapper.writeValue(response.getOutputStream(), body);
-                        })*/
         return http.build();
     }
 
