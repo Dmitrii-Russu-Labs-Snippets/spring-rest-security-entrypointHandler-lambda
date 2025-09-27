@@ -3,13 +3,18 @@
 Custom `AuthenticationEntryPoint` and `AccessDeniedHandler` implemented as **lambdas in `SecurityConfig`**.
 Returns custom JSON for `401 Unauthorized` and `ProblemDetail` (RFC7807) for `403 Forbidden`.
 
+---
+
 ## Features
 - 401 Unauthorized → simple custom JSON (`status`, `error`, `message`, `timestamp`, `path`)
 - 403 Forbidden → RFC7807 `ProblemDetail` (`type`, `title`, `status`, `detail`, `instance`, `timestamp`)
 - Compact implementation using lambdas in `SecurityFilterChain` (no separate components)
 - Easy to adapt to production (inject `ObjectMapper`, integrate MDC/tracing for `traceId`)
 
+---
+
 ## Example 401 response
+
 Content-Type: `application/json`
 ```json
 {
@@ -22,6 +27,7 @@ Content-Type: `application/json`
 ```
 
 ## Example 403 response
+
 Content-Type: `application/problem+json`
 ```json
 {
@@ -34,10 +40,14 @@ Content-Type: `application/problem+json`
 }
 ```
 
+---
+
 ## How to Run
 ```
 ./mvnw spring-boot:run
 ```
+---
+
 ## Example curl
 401 (no credentials)
 ```
@@ -55,6 +65,7 @@ curl -i -u ann:1234 http://localhost:8080/auth/admin
 ```
 curl -i -u jack:123 http://localhost:8080/auth/admin
 ```
+---
 
 Related
 
