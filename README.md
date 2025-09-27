@@ -53,9 +53,11 @@ curl http://localhost:8080/auth/user
 ```
 curl -u ann@gmail.com:1234 http://localhost:8080/auth/admin
 ```
-
-Related Repositories:
+Related Repositories
 
 - spring-rest-security-entrypointHandler-component – AuthenticationEntryPoint & AccessDeniedHandler as separate components
+
+spring-rest-security-entrypointHandler-bean – Same handlers as Spring beansRelated Repositories:
+- 
 
 - spring-rest-security-entrypointHandler-bean – Same handlers as Spring beans
