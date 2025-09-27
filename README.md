@@ -47,7 +47,7 @@ Spring Security 6+
 Call protected endpoints to see JSON and ProblemDetail responses for 401/403:
 
 ```
-curl -u anny@gmail.com:1234 http://localhost:8080/auth/user
+curl http://localhost:8080/auth/user
 ```
 
 ```
